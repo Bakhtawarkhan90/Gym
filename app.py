@@ -3,7 +3,7 @@ import mysql.connector
 import os
 import time
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static', static_folder='.')
 
 # Retry logic for MySQL connection
 while True:
@@ -60,5 +60,11 @@ def submit():
 def thank_you():
     return send_from_directory(os.getcwd(), 'thankyou.html')
 
+
+@app.route('/<path:filename>') 
+def serve_static(filename): 
+    return send_from_directory(os.getcwd(), filename)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+

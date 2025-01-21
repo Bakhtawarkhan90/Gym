@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Body styling */
+        body {
+            background-image: url('https://images.unsplash.com/photo-1517508732953-43b0db0236ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Center container */
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Heading styling */
+        .thankyou-message h1 {
+            font-size: 3rem;
+            color: #ffd700;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+        }
+
+        .thankyou-message p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Image gallery styling */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .thankyou-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .thankyou-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.7);
+        }
+
+        /* Call-to-action button styling */
+        .cta-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #ffd700;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #ffc107;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .thankyou-message h1 {
+                font-size: 2.5rem;
+            }
+
+            .thankyou-message p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="thankyou-message">
+            <h1>Thank You!</h1>
+            <p>We have received your submission.</p>
+            <p>Your message has been recorded.</p>
+            <div class="image-gallery">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm_5PNMuqBAmmbYfd0d2sz3V4fdeQ53ellFA&s" alt="Gym Workout" class="thankyou-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJvc8PlYst5OOw9Y_Zzktsghe2mMT__nfSZg&s" alt="Gym Women" class="thankyou-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOq6YIskLrgm_VZaB6yQiMN0hLQqRamvay6Q&s" alt="Gym Girl" class="thankyou-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9iTBch_t1yvK2oUgdITYQ1K25n40v9ulsLhn9DLrMVpRAstV52CV9UffSnQZPv-60tLQ&usqp=CAU" alt="Gym Men" class="thankyou-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3ZYF4bwU_IWpCu1t8MW91R5T-aPXkoVLN9Q&s" alt="Gym Workout" class="thankyou-image">
+            </div>
+            <button class="cta-button">Explore More</button>
+        </div>
+    </div>
+</body>
+
+</html>
