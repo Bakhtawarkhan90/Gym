@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gym-deployment
+  labels:
+    app: gym
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gym
+  template:
+    metadata:
+      labels:
+        app: gym
+    spec:
+      containers:
+        - name: gymso
+          image: bakhtawar375/gym:latest
+          env:
+            - name: MYSQL_HOST
+              value: "database"         # This Is Your MYSQL Service Name Or IP
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_PASSWORD
+              value: "kali"
+            - name: MYSQL_DB
+              value: "gym"
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: mysqldata
+              mountPath: /var/lib/mysql
+          imagePullPolicy: Always
+      volumes:
+        - name: mysqldata
+          persistentVolumeClaim:
+            claimName: mysql-pvc
