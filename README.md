@@ -113,5 +113,5 @@ ii) Backend container:
 # WELCOME TO  GYMSO !
 
 ## Home Page
-![Home Page(./Screenshot%202025-01-21%20130229.png)
+![Home Page](./Screenshot%202025-01-21%20130229.png)
 
