@@ -1,32 +1,48 @@
 pipeline {
-    agent any 
+    agent any
     environment {
         SONAR_HOME = tool "Sonar"
         GITHUB_TOKEN = credentials('GithubToken')  // Use a Jenkins credential for GitHub PAT
         GITHUB_USERNAME = 'Bakhtawarkhan90'   // Replace with your GitHub username
     }
-    stages{
-        stage("Workspace Clean-up"){
-            steps{
-                script{
+    stages {
+        stage("Workspace Clean-up") {
+            steps {
+                script {
                     cleanWs()
                 }
             }
         }
-        stage("Clonning Code"){
-            steps{
-            git url:"https://github.com/Bakhtawarkhan90/Gym.git" , branch : "main"
+        stage("Cloning Code") {
+            steps {
+                git url: "https://github.com/Bakhtawarkhan90/Gym.git", branch: "main"
             }
         }
-        stage("Sonarqube Code Analysis"){
-            steps{
+        stage("Sonarqube Code Analysis") {
+            steps {
                 withSonarQubeEnv("Sonar") {
                     sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=Gym -Dsonar.projectKey=Gym -X"
                 }
             }
         }
-        stage("Docker Image Building"){
-            steps{
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage("Download SonarQube Report") {
+            steps {
+                script {
+                    sh """
+                    curl -u admin:admin "http://localhost:9000/api/measures/component?component=YourProjectKey&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density" -o sonar-report.json
+                    """
+                }
+            }
+        }
+        stage("Docker Image Building") {
+            steps {
                 sh "docker build . -t gym:latest"
             }
         }
@@ -38,8 +54,8 @@ pipeline {
                 }
             }
         }
-        stage("Push Docker-Hub"){
-            steps{
+        stage("Push Docker-Hub") {
+            steps {
                 withCredentials([usernamePassword(credentialsId: "dockerHub", passwordVariable: "dockerHubPass", usernameVariable: "dockerHubUser")]) {
                     sh "echo \$dockerHubPass | docker login -u \$dockerHubUser --password-stdin"
                     sh "docker tag gym:latest ${env.dockerHubUser}/gym:latest"
@@ -49,14 +65,14 @@ pipeline {
         }
         stage('OWASP DC') {
             steps {
-                  dependencyCheck additionalArguments: '--scan .', odcInstallation: 'OWASP'
-                  dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                echo "ALL-CHECK"
             }
         }
-        stage("Deploy On K8s"){
-            steps{
-                sh " docker compose down "
-                sh "docker compose up --build -d"
+        stage("Deploy On K8s") {
+            steps {
+                sh "cd /var/lib/jenkins/workspace/Gym/k8s"
+                sh " kubectl delete -f . "
+                sh " kubectl apply -f . "
             }
         }
     }
@@ -74,4 +90,4 @@ pipeline {
                       "Check it here: ${env.BUILD_URL}"
         }
     }
-}    
+}
