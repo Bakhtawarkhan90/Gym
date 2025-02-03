@@ -124,6 +124,7 @@ ii) Backend container:
 
 ## WORKFLOW
 ![Flow](./Screenshot%202025-02-03%20183909.png)
+![Flow](./Screenshot%202025-02-03%20185044)
 
 ## Home Page
 ![Home Page](./Screenshot%202025-01-21%20130229.png)
