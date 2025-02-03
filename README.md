@@ -127,3 +127,6 @@ ii) Backend container:
 
 ## Submission Page 
 ![Sub Page](./Screenshot%202025-01-21%20130331.png)
+
+## WORKFLOW
+![Flow](./Screenshot%202025-02-03%20183909.png)
