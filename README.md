@@ -102,6 +102,16 @@ ii) Backend container:
        message TEXT
    );
    ```
+5. Steps to see Data in DB:
+   ```bash
+   docker exec -it database /bin/bash
+   mysql -u root -p
+   enter password: kali
+   show database;
+   use gym;
+   show tables;
+   select * from messages;
+   ```  
 
 ## Notes
 
