@@ -65,7 +65,8 @@ pipeline {
         }
         stage('OWASP DC') {
             steps {
-                echo "ALL-CHECK"
+                dependencyCheck additionalArguments: '--scan .', odcInstallation: 'OWASP'
+                  dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
         stage("Deploy On K8s") {
